@@ -4,7 +4,7 @@ const Schema = Mongoose.Schema;
 mongoose.connect();
 const schemaProduct = new Schema({
   Productos: [{
-    type: String,
+    type: [],
     required: true,
   }],
   Total: {
