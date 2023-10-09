@@ -1,9 +1,16 @@
 {
+  "scripts": {
+    "dev": "nodemon app",
+    "start": "node app"
+  },
   "dependencies": {
     "mongoose": "^7.5.4",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.1",
     "sequelize": "^6.33.0",
     "tedious": "^16.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
