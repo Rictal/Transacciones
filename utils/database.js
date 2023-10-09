@@ -1,21 +1,21 @@
-const Mongoose = require('mongoose');
+const Mongoose = require("mongoose");
 
 class Database {
-  connection = Mongoose.connection;
-  constructor() {
-  }
+  connection = null;
+  constructor() {}
   async connect() {
     try {
-      await Mongoose.connect(
-        `mongodb+srv://SrJulioDeLana:Rictal98.@cluster0.pfp4y1n.mongodb.net/Transacciones?retryWrites=true&w=majority`,
+      this.connection = await Mongoose.connect(
+        `mongodb+srv://SrJulioDeLana:Rictal98.@cluster0.pfp4y1n.mongodb.net/Transacciones?retryWrites=true&w=majority`
         /*
         {
           useNewUrlParser: true,
           useUnifiedTopology: true,
         }
         */
-       console.log(`conexion exitosa`)
       );
+
+      console.log(`conexión exitosa`);
     } catch (error) {
       console.error(error);
     }
@@ -23,11 +23,12 @@ class Database {
 
   async close() {
     try {
-      await this.connection.close();
+      //await this.connection.close();
+      this.connection?.disconnect();
     } catch (error) {
       console.error(error);
     }
   }
 }
 
-module.exports = new Database();
+module.exports = Database;
