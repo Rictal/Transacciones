@@ -10,8 +10,3 @@ Producto.readAll();
 //Producto.creatPRoduct(producto);
 //Producto.updateStock(`Jamon`, 48);
 //Producto.deleteProduct(`Leche`);
-
-/* const Server = require("./models/server");
-
-const server = new Server();
-server.init(); */
