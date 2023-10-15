@@ -1,7 +1,5 @@
 const Mongoose = require("mongoose");
-const mongoose = require("../utils/database");
 const Schema = Mongoose.Schema;
-mongoose.connect();
 const schemaProduct = new Schema({
   Nombre: {
     type: String,
@@ -17,4 +15,5 @@ const schemaProduct = new Schema({
   },
 });
 
-module.exports = Mongoose.model("Productos", schemaProduct);
+const productModel = Mongoose.model("Productos", schemaProduct);
+module.exports = productModel;

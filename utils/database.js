@@ -1,4 +1,4 @@
-const Mongoose = require('mongoose');
+/*const Mongoose = require('mongoose');
 
 class Database {
   connection = Mongoose.connection;
@@ -13,7 +13,7 @@ class Database {
           useNewUrlParser: true,
           useUnifiedTopology: true,
         }
-        */
+        
        console.log(`conexion exitosa`)
       );
     } catch (error) {
@@ -31,3 +31,4 @@ class Database {
 }
 
 module.exports = new Database();
+*/
