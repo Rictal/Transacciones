@@ -2,9 +2,11 @@ const Mongoose = require("mongoose");
 const productoModel = require(`../models/productoModel`);
 const catchAsync = require("../utils/catchAsync");
 
-exports.creatProduct = async (newProduct) => {
+exports.creatProduct = async (req, res) => {
+  console.log(req.body);
   try {
     const newProduct = await productoModel.create(req.body);
+
     res.status(201).json({
       status: `succes`,
       data: {
@@ -14,13 +16,27 @@ exports.creatProduct = async (newProduct) => {
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      message: err,
+      message: error,
     });
   }
 };
+
 exports.readAllProducts = async (req, res) => {
   try {
-    const products = await productoModel.find();
+    //*********bnusqueda es el nopmbre del "atributo" para la query
+    //req.query comienza despues del final de la ruta con un signo de interrogacion
+    const { busqueda } = req.query;
+    console.log(req.query);
+    //si no hay coincidencias con la query arroja todo y retornna
+    if (!busqueda) {
+      const products = await productoModel.find();
+      return res.send(products);
+    }
+    //Expresion regular para busqueda con coincidencias con mayus o minusculas (mongoose al menos con una letra coincida)
+    const regex = new RegExp(busqueda, "i");
+    //guarda las coincidencias con la busqueda
+    const products = await productoModel.find({ Nombre: regex });
+    //devuelve las coincidencias
     res.send(products);
   } catch (err) {
     res.send(err);
@@ -73,10 +89,10 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateStock = async (product, newStock) => {
+exports.updateStock = async (req, res) => {
   catchAsync(async (req, res, next) => {
     const product = await productoModel
-      .find({ nOMBRE: { $regex: "developer" } })
+      .find({ Nombre: { $regex: "developer" } })
       .pretty();
     //////////////////////////////AQUI ME QUEDE///////////////////////////////////////////////////////////
     if (!product) {

@@ -3,15 +3,16 @@ const productController = require(`../controllers/ProductController`);
 const productModel = require("../models/productoModel");
 const router = express.Router();
 
-router
-  .route("/")
-  .get(productController.readAllProducts)
-  .post(productController.creatProduct);
+//Obtener todos los productos
+router.get(`/`, productController.readAllProducts);
+//Crear ptoducto
+router.post(`/`, productController.creatProduct);
 
-router
-  .route("/:id")
-  .get(productController.getProduct)
-  .delete(productController.deleteProduct)
-  .patch(productController.updateProduct);
+//Obtener ptoducto por ID
+router.get(`/:id`, productController.getProduct);
+//Eliminar ptoducto por ID
+router.delete(`/:id`, productController.deleteProduct);
+//Actualizar ptoducto por ID
+router.patch(`/:id`, productController.updateProduct);
 
 module.exports = router;
