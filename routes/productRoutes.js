@@ -1,6 +1,5 @@
 const express = require(`express`);
 const productController = require(`../controllers/ProductController`);
-const productModel = require("../models/productoModel");
 const router = express.Router();
 
 //Obtener todos los productos
