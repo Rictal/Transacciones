@@ -1,7 +1,7 @@
 const Mongoose = require("mongoose");
 const productoModel = require(`../models/productoModel`);
 const catchAsync = require("../utils/catchAsync");
-const Errors = require("../utils/errors");
+const errors = require("../utils/errors");
 
 exports.creatProduct = async (req, res) => {
   console.log(req.body);
@@ -45,7 +45,7 @@ exports.readAllProducts = async (req, res) => {
 exports.getProduct = catchAsync(async (req, res, next) => {
   const product = await productoModel.findById(req.params.id);
   if (!product) {
-    return next(new Errors("Not prodyct found with the ID", 404));
+    return next(new errors("Not prodyct found with the ID", 404));
   }
   res.status(200).json({
     status: "sucess",
@@ -66,7 +66,7 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
   );
 
   if (!product) {
-    return next(new Errors("No product found with that ID", 404));
+    return next(new errors("No product found with that ID", 404));
   }
 
   res.status(200).json({
@@ -80,7 +80,7 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
 exports.deleteProduct = catchAsync(async (req, res, next) => {
   const product = await productoModel.findByIdAndDelete(req.params.id);
   if (!product) {
-    return next(new Errors("No product found with that ID", 404));
+    return next(new errors("No product found with that ID", 404));
   }
   res.status(204).json({
     status: "success",
