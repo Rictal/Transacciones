@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const app = express();
 
+/*
 app.get("/login", (req, res) => {
   res.send(`
   <html>
@@ -23,22 +24,24 @@ app.get("/login", (req, res) => {
     </body>
   </html>`);
 });
+*/
 
 app.post("/auth", (req, res) => {
   console.log("1", res);
-   const { username, password } = req.body;
-
+  const { username, password } = req.body;
   //revisar BD para validar usuario
   const user = { username: username, password: password };
   const accesToken = generateAccessTokeeen(user);
   res.header("autoritation", accesToken).json({
     message: "usuario autenticado",
     token: token,
-  }); 
+  });
 });
+
 function generateAccessTokeeen(user) {
   return jwt.sign(user, process.env.SECRETKEY, { expiresIn: "5m" });
 }
+
 app.use(express.json);
 
 app.use(express.urlencoded({ extended: false }));
