@@ -8,7 +8,6 @@ require("dotenv").config();
 
 const app = express();
 
-/*
 app.get("/login", (req, res) => {
   res.send(`
   <html>
@@ -24,7 +23,6 @@ app.get("/login", (req, res) => {
     </body>
   </html>`);
 });
-*/
 
 app.post("/auth", (req, res) => {
   console.log("1", res);
@@ -38,9 +36,11 @@ app.post("/auth", (req, res) => {
   });
 });
 
+
 function generateAccessTokeeen(user) {
   return jwt.sign(user, process.env.SECRETKEY, { expiresIn: "5m" });
 }
+
 
 app.use(express.json);
 
